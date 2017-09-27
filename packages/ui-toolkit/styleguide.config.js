@@ -87,7 +87,6 @@ module.exports = {
         'src/form/input.js',
         'src/form/number-input.js',
         'src/form/checkbox.js',
-        'src/dropdown/index.js',
         'src/progress-bar/index.js',
         'src/form/radio.js',
         'src/form/select.js',
@@ -121,9 +120,12 @@ module.exports = {
       h5: 14,
       h6: 12
     },
+    sidebarWidth: 300,
+    spaceFactor: 6,
     fontFamily: {
       base: '"Libre Franklin", -apple-system, cursive'
-    }
+    },
+    sidebarBackground: '#1E313B'
   },
   styles: {
     Logo: {
