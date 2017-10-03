@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import remcalc from 'remcalc';
 import isEqual from 'lodash.isequal';
-import {
-  Button,
-  Label,
-  Slider
-} from 'joyent-ui-toolkit';
+import { Button, Label, Slider } from 'joyent-ui-toolkit';
 import { default as defaultState } from '@state/state';
 import { default as DiskTypeFrom } from '@components/diskTypeForm';
 
 const FilterWrapper = styled.section`
   display: flex;
+  margin-bottom: 24px;
 
   > div {
     flex-grow: 1;
@@ -26,7 +23,7 @@ const GroupWrapper = styled.section`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: ${remcalc(18)};
+  margin-top: ${remcalc(18)};
 `;
 
 const Wrapper = styled.section`
@@ -143,32 +140,6 @@ class Filters extends Component {
     return (
       <Wrapper>
         <Title>Choose package</Title>
-        <Subtitle>Filter by package type</Subtitle>
-        <GroupWrapper>
-          <div>
-            {filters.groups
-              .sort((a, b) => (a.name < b.name ? -1 : 1))
-              .map(group => (
-                <Button
-                  key={group.name}
-                  tertiary
-                  small
-                  selected={group.selected}
-                  onClick={() => this.groupChange(group)}
-                >
-                  {group.name}
-                </Button>
-              ))}
-          </div>
-          <Button
-            disabled={isEqual(filters, defaultState.filters)}
-            secondary
-            small
-            onClick={this.handleResetClick}
-          >
-            Reset Filters
-          </Button>
-        </GroupWrapper>
         <Label>Filter by package feature</Label>
         <FilterWrapper key={reset}>
           <Slider
@@ -220,6 +191,32 @@ class Filters extends Component {
             onSubmit={e => {}}
           />
         </FilterWrapper>
+        <Subtitle>Filter by package type</Subtitle>
+        <GroupWrapper>
+          <div>
+            {filters.groups
+              .sort((a, b) => (a.name < b.name ? -1 : 1))
+              .map(group => (
+                <Button
+                  key={group.name}
+                  tertiary
+                  small
+                  selected={group.selected}
+                  onClick={() => this.groupChange(group)}
+                >
+                  {group.name}
+                </Button>
+              ))}
+          </div>
+          <Button
+            disabled={isEqual(filters, defaultState.filters)}
+            secondary
+            small
+            onClick={this.handleResetClick}
+          >
+            Reset Filters
+          </Button>
+        </GroupWrapper>
       </Wrapper>
     );
   }
