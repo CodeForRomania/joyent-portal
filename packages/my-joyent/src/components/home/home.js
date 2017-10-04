@@ -82,10 +82,18 @@ class Home extends Component {
     return (
       <Main>
         <SectionNav />
-        <Breadcrumb>
-          <BreadcrumbItem>Instances</BreadcrumbItem>
-          <BreadcrumbItem>Create Instance</BreadcrumbItem>
-        </Breadcrumb>
+        <Breadcrumb
+          links={[
+            {
+              name: 'Instances',
+              pathname: '/'
+            },
+            {
+              name: 'Create Instance',
+              pathname: '/'
+            }
+          ]}
+        />
         <Row>{_msg}</Row>
         <Row>
           <Filters
