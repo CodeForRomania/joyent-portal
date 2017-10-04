@@ -4,13 +4,7 @@ import styled from 'styled-components';
 import { SectionNav } from '@components/navigation';
 import { Filters } from '@components/filters';
 import PackagesHOC from '@containers/packages';
-import {
-  Message,
-  Breadcrumb,
-  BreadcrumbItem,
-  Anchor,
-  Button
-} from 'joyent-ui-toolkit';
+import { Message, Breadcrumb, Anchor, Button } from 'joyent-ui-toolkit';
 
 const Main = styled.main`
   /* Prettier stahp */
@@ -82,10 +76,18 @@ class Home extends Component {
     return (
       <Main>
         <SectionNav />
-        <Breadcrumb>
-          <BreadcrumbItem>Instances</BreadcrumbItem>
-          <BreadcrumbItem>Create Instance</BreadcrumbItem>
-        </Breadcrumb>
+        <Breadcrumb
+          links={[
+            {
+              name: 'Instances',
+              pathname: '/'
+            },
+            {
+              name: 'Create Instance',
+              pathname: '/'
+            }
+          ]}
+        />
         <Row>{_msg}</Row>
         <Row>
           <Filters
