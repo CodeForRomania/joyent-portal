@@ -143,32 +143,6 @@ class Filters extends Component {
     return (
       <Wrapper>
         <Title>Choose package</Title>
-        <Subtitle>Filter by package type</Subtitle>
-        <GroupWrapper>
-          <div>
-            {filters.groups
-              .sort((a, b) => (a.name < b.name ? -1 : 1))
-              .map(group => (
-                <Button
-                  key={group.name}
-                  tertiary
-                  small
-                  selected={group.selected}
-                  onClick={() => this.groupChange(group)}
-                >
-                  {group.name}
-                </Button>
-              ))}
-          </div>
-          <Button
-            disabled={isEqual(filters, defaultState.filters)}
-            secondary
-            small
-            onClick={this.handleResetClick}
-          >
-            Reset Filters
-          </Button>
-        </GroupWrapper>
         <Label>Filter by package feature</Label>
         <FilterWrapper key={reset}>
           <Slider
