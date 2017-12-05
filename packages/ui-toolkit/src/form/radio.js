@@ -22,12 +22,6 @@ const Li = styled.li`
 const Ul = styled.ul`
   margin: 0;
   padding: 0;
-  margin-bottom: ${remcalc(8)};
-
-  + label {
-    margin-left: ${remcalc(26)};
-    font-size: ${remcalc(13)};
-  }
 `;
 
 const RadioItem = BaseInput(({ children, id, ...rest }) => (
