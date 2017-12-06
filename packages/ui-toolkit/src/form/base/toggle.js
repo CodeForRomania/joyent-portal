@@ -114,6 +114,7 @@ const InnerContainer = styled.div`
   height: ${remcalc(18)};
   position: relative;
   cursor: pointer;
+  
   ${isNot('noMargin')`
     margin-bottom: ${remcalc(12)};
   `}
