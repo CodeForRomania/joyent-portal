@@ -114,7 +114,9 @@ const InnerContainer = styled.div`
   height: ${remcalc(18)};
   position: relative;
   cursor: pointer;
-  margin-bottom: ${remcalc(12)};
+  ${isNot('noMargin')`
+    margin-bottom: ${remcalc(12)};
+  `}
 `;
 
 const Container = styled.div`
@@ -144,7 +146,7 @@ const ToggleBase = ({ container = null, type = 'radio' }) =>
         (rest.value === true || rest.checked === true);
 
       const toggle = (
-        <InnerContainer {...types} type={type}>
+        <InnerContainer {...types} type={type} {...rest}>
           <StyledInput
             {...rest}
             id={newValue.id}

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import React from 'react';
-import remcalc from 'remcalc';
 import PropTypes from 'prop-types';
 
 import BaseToggle from './base/toggle';
