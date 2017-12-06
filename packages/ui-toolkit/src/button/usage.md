@@ -9,8 +9,6 @@ const { default: Button } = require('./');
 <span>
   <Button>Inspire the lazy</Button>
   <span> </span>
-  <Button href="#1">Inspire the lazy (anchor)</Button>
-  <span> </span>
   <Button disabled>Inspire the lazy</Button>
 </span>;
 ```
@@ -26,10 +24,6 @@ const { default: Button } = require('./');
 <span>
   <Button secondary>Inspire the brave</Button>
   <span> </span>
-  <Button href="#2" secondary>
-    Inspire the brave (anchor)
-  </Button>
-  <span> </span>
   <Button secondary disabled>Inspire the brave</Button>  
 </span>;
 ```
@@ -43,7 +37,6 @@ const { default: Button } = require('./');
 
 <span>
   <Button secondary small>Inspire the brave</Button>
-  <Button secondary small disabled>Inspire the brave</Button>
 </span>;
 ```
 
@@ -81,7 +74,7 @@ const { Actions } = require('../icons');
 
 Primary anchor is a type of a link that sits outside the body text.
 
-```
+```jsx
 const React = require('react');
 const Anchor = require('../text').Anchor;
 
