@@ -1,6 +1,11 @@
 import React from 'react';
 import { Margin } from 'styled-components-spacing';
 import remcalc from 'remcalc';
+import { connect } from 'react-redux';
+import { graphql, compose } from 'react-apollo';
+import get from 'lodash.get';
+import omit from 'lodash.omit';
+import uniqBy from 'lodash.uniqby';
 
 import { ViewContainer, H2, Button, Divider } from 'joyent-ui-toolkit';
 
@@ -14,7 +19,7 @@ import Firewall from '@containers/create-instance/firewall';
 import CNS from '@containers/create-instance/cns';
 import Affinity from '@containers/create-instance/affinity';
 
-export default ({ step, ...props }) => (
+const CreateInstance = ({ step, ...props }) => (
   <ViewContainer>
     <Margin top={4} bottom={4}>
       <H2>Create Instances</H2>
@@ -56,3 +61,64 @@ export default ({ step, ...props }) => (
     </Margin>
   </ViewContainer>
 );
+
+export default compose(
+  connect(({ form, values }, ownProps) => {
+    const name = get(
+      form,
+      'create-instance-name.values.name',
+      '<instance-name>'
+    );
+    const firewall = get(
+      form,
+      'CREATE-INSTANCE-FIREWALL.values.enabled',
+      false
+    );
+    const image = get(
+      form,
+      'create-instance-image.values.image',
+      '<instance-image>'
+    );
+    const pkg = get(
+      form,
+      'create-instance-package.values.package',
+      '<instance-image>'
+    );
+    const networks = get(
+      form,
+      'CREATE-INSTANCE-NETWORKS.values',
+      '<instance-image>'
+    );
+    const metadata = get(values, 'create-instance-metadata', []);
+    const receivedTags = get(values, 'create-instance-tags', []);
+    const affinity = get(values, 'create-instance-affinity', []);
+    const cns = get(values, 'create-instance-cns-enabled', true);
+    const cnsServices = get(values, 'create-instance-cns-services', null);
+
+    const tags = receivedTags.map(a => omit(a, 'expanded'));
+
+    tags.push({ name: 'triton.cns.enabled', value: cns });
+
+    if (cnsServices && cns) {
+      tags.push({ name: 'triton.cns.services', value: cnsServices.join(',') });
+    }
+
+    return {
+      name: name.toLowerCase(),
+      pkg,
+      image,
+      affinity: affinity.map(a => omit(a, 'expanded')),
+      metadata: metadata.map(a => omit(a, 'expanded')),
+      tags: uniqBy(tags, 'name'),
+      firewall_enabled: firewall,
+      networks: Object.keys(networks).filter(network => networks[network])
+    };
+  }),
+  connect(
+    null,
+    (
+      dispatch,
+      { name, pkg, image, affinity, metadata, tags, firewall_enabled, networks }
+    ) => ({})
+  )
+)(CreateInstance);
