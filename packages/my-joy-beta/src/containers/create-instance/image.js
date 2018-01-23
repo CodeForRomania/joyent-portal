@@ -10,8 +10,11 @@ import { InstanceTypeIcon, StatusLoader } from 'joyent-ui-toolkit';
 import Description from '@components/description';
 import Image, { Preview } from '@components/create-instance/image';
 import Title from '@components/create-instance/title';
-import imageData from '@data/images-map.json';
-import getImages from '@graphql/get-images.gql';
+import Description from '@components/create-instance/description';
+import AnimatedWrapper from '@containers/create-instance/animatedWrapper';
+import imageData from '../../data/images-map.json';
+
+import getImages from '../../graphql/get-images.gql';
 
 const ImageContainer = ({
   expanded,
@@ -20,10 +23,12 @@ const ImageContainer = ({
   handleEdit,
   loading,
   images,
-  vms
+  vms,
+  step
 }) => (
   <Fragment>
     <Title
+      id={step}
       onClick={!expanded && !image && handleEdit}
       icon={<InstanceTypeIcon />}
     >
@@ -66,13 +71,13 @@ const ImageContainer = ({
             images={images}
             onEdit={handleEdit}
           />
-        ) : null
-      }
+        ) : null}
     </ReduxForm>
   </Fragment>
 );
 
 export default compose(
+  AnimatedWrapper,
   connect(
     (state, ownProps) => {
       return {

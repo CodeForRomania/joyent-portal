@@ -24,6 +24,8 @@ import {
   StatusLoader
 } from 'joyent-ui-toolkit';
 
+import getAccount from '../../graphql/get-account.gql';
+
 import {
   Hostname,
   Header,
@@ -33,8 +35,9 @@ import {
 
 import Tag from '@components/tags';
 import Title from '@components/create-instance/title';
-import Description from '@components/description';
-import getAccount from '@graphql/get-account.gql';
+import Tag from '@components/instances/tags';
+import Description from '@components/create-instance/description';
+import AnimatedWrapper from '@containers/create-instance/animatedWrapper';
 
 const CNS_FORM = 'create-instance-cns';
 
@@ -51,10 +54,15 @@ const CNSContainer = ({
   handleToggleCnsEnabled,
   handleAddService,
   handleRemoveService,
-  loading
+  loading,
+  step
 }) => (
   <Fragment>
-    <Title onClick={!expanded && !proceeded && handleEdit} icon={<CnsIcon />}>
+    <Title
+      id={step}
+      onClick={!expanded && !proceeded && handleEdit}
+      icon={<CnsIcon />}
+    >
       Container Name Service
     </Title>
     {expanded ? (
@@ -184,6 +192,7 @@ const CNSContainer = ({
 );
 
 export default compose(
+  AnimatedWrapper,
   graphql(getAccount, {
     props: ({ data: { loading, account: { id } = [] } }) => ({
       loading,
