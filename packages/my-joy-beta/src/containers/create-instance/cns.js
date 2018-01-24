@@ -31,6 +31,7 @@ const CNSContainer = ({
   handleEdit,
   handleToggleCnsEnabled,
   handleAddService,
+  handleRemoveService,
   step
 }) => (
   <Fragment>

@@ -12,17 +12,15 @@ import constantCase from 'constant-case';
 import { reset } from 'redux-form';
 
 import { PackageIcon, StatusLoader } from 'joyent-ui-toolkit';
+
 import {
   Filters,
   Packages,
   Package,
   Overview
 } from '@components/create-instance/package';
-import Title from '@components/create-instance/title';
-import Description from '@components/create-instance/description';
-import priceData from '../../data/prices.json';
-import AnimatedWrapper from '@containers/create-instance/animatedWrapper';
 
+import AnimatedWrapper from '@containers/create-instance/animatedWrapper';
 import Title from '@components/create-instance/title';
 import Description from '@components/description';
 import getPackages from '@graphql/get-packages.gql';
